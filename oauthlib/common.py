@@ -406,10 +406,8 @@ class Request(object):
         self._params.update(self.headers)
 
     def __getattr__(self, name):
-        if name in self._params:
-            return self._params[name]
-        else:
-            raise AttributeError(name)
+        # Zong's patch
+        return self._params.get(name, None)
 
     def __repr__(self):
         body = self.body
